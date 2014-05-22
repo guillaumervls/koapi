@@ -39,6 +39,13 @@ Ressource.settings({
 
 ```javascript
 var users = new Resource('users', {
+  schema: {
+    // To validate data structure coming from the client
+  },
+  semanticValidate: function * (json) {
+    // Additional semantic data validation
+    // that cannot be done with a schema
+  },
   // GET /users
   index: function * (next) {
     // You should write your documents to this.documents and metadata to this.meta
@@ -53,7 +60,7 @@ var users = new Resource('users', {
 
 ##API
 
-You can implement, but you shoudn't call `index`, `consolidate` and `outputFormat`.
+You can implement, but you shoudn't call `index`, `semanticValidate`, `consolidate` and `outputFormat`.
 
 ###consolidateReferents(type1, type2, ...)
 Trigger a consolidation of documents that reference `this` document. You can consolidate only certain types of referents by providing them to the function.
