@@ -17,9 +17,9 @@ var Promise = require('koapi').Promise;
 ```
 
 ```javascript
-var Ressource = require('koapi').Ressource;
+var koapi = require('koapi');
 
-Ressource.settings({
+koapi.settings({
   validateJSON: function (schema, json) {
     return promiseForValidation;
   },
@@ -28,9 +28,13 @@ Ressource.settings({
   },
   setByIdAndType: function (type, id, object) {
     return promiseForInsertion;
-  }
+  },
   deleteByIdAndType: function (type, id) {
     return promiseForDeletion;
+  },
+  getByRef: function (type, id) {
+    // gets all the ids of the docs referencing a document
+    return promiseForArray;
   }
 });
 ```
@@ -38,6 +42,8 @@ Ressource.settings({
 `Ressource` inherits from [Koa Ressource Router](https://github.com/alexmingoia/koa-resource-router). But from that you just have to set `index`. Then you set `consolidate`. In it you can call `this.consolidateReferents()` and `otherRessource.consolidateById(id)`. These functions return promises.
 
 ```javascript
+var Ressource = require('koapi').Ressource;
+
 var users = new Resource('users', {
   schema: {
     // To validate data structure coming from the client
