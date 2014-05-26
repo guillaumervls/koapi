@@ -20,21 +20,21 @@ var Promise = require('koapi').Promise;
 var koapi = require('koapi');
 
 koapi.settings({
-  validateJSON: function (schema, json) {
-    return promiseForValidation;
+  validateJSON: function * (schema, json) {
+    // throw or return a rejected promise if not valid
   },
-  getByIdAndType: function (type, id) {
-    return promiseForItem;
+  getByIdAndType: function * (type, id) {
+    return item; // A document (or a promise for it)
   },
-  setByIdAndType: function (type, id, object) {
-    return promiseForInsertion;
+  setByIdAndType: function * (type, id, object) {
+    // ...
   },
-  deleteByIdAndType: function (type, id) {
-    return promiseForDeletion;
+  deleteByIdAndType: function * (type, id) {
+    // ...
   },
-  getByRef: function (type, id) {
+  getByRefAndType: function * (type, id) {
     // gets all the ids of the docs referencing a document
-    return promiseForArray;
+    return items; // An array of documents (or a promise for it)
   }
 });
 ```
@@ -72,7 +72,7 @@ You can implement, but you shoudn't call `index`, `semanticValidate`, `consolida
 Trigger a consolidation of documents that reference `this` document. You can consolidate only certain types of referents by providing them to the function.
 
 ###consolidateById(id)
-Trigger a consolidation a document.
+Trigger a consolidation on a document.
 
 ##NB :
 
