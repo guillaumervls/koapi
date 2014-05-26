@@ -51,15 +51,19 @@ var users = new Resource('users', {
   semanticValidate: function * (json) {
     // Additional semantic data validation
     // that cannot be done with a schema
+    // Throw or return a rejected promise if not valid
   },
   // GET /users
-  index: function * (next) {
-    // You should write your documents to this.documents and metadata to this.meta
+  index: function * (getParams) {
+    return {
+      documents: [...],
+      meta: {}
+    };
   },
   consolidate: function * (json) {
   },
-  outputFormat: function * (next) {
-    // Transform documents in this.documents
+  outputFormat: function * (doc) {
+    return formattedDoc;
   }
 });
 ```
