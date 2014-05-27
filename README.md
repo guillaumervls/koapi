@@ -48,7 +48,7 @@ var users = new Resource('users', {
   schema: {
     // To validate data structure coming from the client
   },
-  semanticValidate: function * (json) {
+  semanticValidate: function * (doc) {
     // Additional semantic data validation
     // that cannot be done with a schema
     // Throw or return a rejected promise if not valid
@@ -60,7 +60,13 @@ var users = new Resource('users', {
       meta: {}
     };
   },
-  consolidate: function * (json) {
+  consolidate: function * (doc) {
+    return docToStore;
+  },
+  // OPTIONAL : by default JSON deep equality test
+  // between new/old stored docs
+  shouldTriggerUpdates: function * (newDoc, oldDoc) {
+    return true || false;
   },
   outputFormat: function * (doc) {
     return formattedDoc;
@@ -70,13 +76,15 @@ var users = new Resource('users', {
 
 ##API
 
-You can implement, but you shoudn't call `index`, `semanticValidate`, `consolidate` and `outputFormat`.
+You can/should **implement**, but you shoudn't **call** `index`, `semanticValidate`, `consolidate`, `shouldTriggerUpdates` and `outputFormat`.
 
+<!--
 ###consolidateReferents(type1, type2, ...)
 Trigger a consolidation of documents that reference `this` document. You can consolidate only certain types of referents by providing them to the function.
 
 ###consolidateById(id)
 Trigger a consolidation on a document.
+-->
 
 ##NB :
 
