@@ -1,0 +1,21 @@
+{
+  "indent": 2,
+  "nonew": true,
+  "plusplus": true,
+  "quotmark": true,
+  "bitwise": true,
+  "forin": true,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "undef": true,
+  "unused": true,
+  "regexp": true,
+  "trailing": true,
+  "node": true,
+  "esnext": true,
+  "noyield": true,
+  "-W079": true // otherwise it complains about "redefining" Promise
+}
